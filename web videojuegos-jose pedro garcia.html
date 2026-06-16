@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Videojuegos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a2e;
+      color: white;
+    }
+
+    nav {
+      background-color: #16213e;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #6c63ff;
+    }
+
+    .pagina {
+      display: none;
+      padding: 40px;
+    }
+
+    .pagina.activa {
+      display: block;
+    }
+
+    h1 {
+      color: #6c63ff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #6c63ff;
+      margin-bottom: 15px;
+    }
+
+    /* PRODUCTOS */
+    .producto {
+      background-color: #16213e;
+      border: 1px solid #6c63ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .producto h3 {
+      margin: 0;
+    }
+
+    .producto .precio {
+      color: #6c63ff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #5a52d5;
+    }
+
+    /* CARRITO */
+    .carrito {
+      background-color: #16213e;
+      border: 1px solid #6c63ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    #lista-carrito {
+      list-style: none;
+      padding: 0;
+      min-height: 30px;
+    }
+
+    #lista-carrito li {
+      padding: 8px 0;
+      border-bottom: 1px solid #2a2a4a;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #lista-carrito li button {
+      background-color: #e74c3c;
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+
+    .total {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .total span {
+      color: #6c63ff;
+    }
+
+    .btn-rojo {
+      background-color: #e74c3c;
+      margin-right: 10px;
+    }
+
+    .btn-verde {
+      background-color: #27ae60;
+    }
+
+    #msg-compra {
+      color: #27ae60;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* CONTACTO */
+    .contacto-info p {
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    .contacto-info a {
+      color: #6c63ff;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      background-color: #16213e;
+      border: 1px solid #6c63ff;
+      border-radius: 5px;
+      color: white;
+      font-size: 14px;
+    }
+
+    #msg-enviado {
+      color: #27ae60;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* SOBRE MI */
+    .sobre-mi p {
+      color: #ccc;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .habilidades {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .habilidad {
+      background-color: #16213e;
+      border: 1px solid #6c63ff;
+      color: #6c63ff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    /* USUARIO */
+    .usuario-info p {
+      color: #ccc;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .usuario-info a {
+      color: #6c63ff;
+    }
+
+    footer {
+      background-color: #16213e;
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" onclick="mostrarPagina('inicio')">Inicio</a>
+  <a href="#" onclick="mostrarPagina('productos')">Productos</a>
+  <a href="#" onclick="mostrarPagina('contacto')">Contacto</a>
+  <a href="#" onclick="mostrarPagina('sobre')">Sobre mí</a>
+  <a href="#" onclick="mostrarPagina('usuario')">Usuario</a>
+</nav>
+
+<!-- INICIO -->
+<div class="pagina activa" id="pagina-inicio">
+  <h1>🎮 Tienda de Videojuegos</h1>
+  <p style="text-align:center; color:#ccc; font-size:16px;">Bienvenido a nuestra tienda. Encontrá los mejores juegos para PC al mejor precio.</p>
+  <br>
+  <div style="text-align:center;">
+    <button onclick="mostrarPagina('productos')">Ver productos</button>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<div class="pagina" id="pagina-productos">
+  <h1>Catálogo de Productos</h1>
+
+  <div class="producto">
+    <div>
+      <h3>⚽ FIFA 2026</h3>
+      <p style="color:#aaa; font-size:13px;">Juego de fútbol</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="precio">$15.000</div>
+      <button onclick="agregarCarrito('FIFA 2026', 15000)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="producto">
+    <div>
+      <h3>🔫 Call of Duty</h3>
+      <p style="color:#aaa; font-size:13px;">Juego de acción</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="precio">$18.000</div>
+      <button onclick="agregarCarrito('Call of Duty', 18000)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="producto">
+    <div>
+      <h3>⛏️ Minecraft</h3>
+      <p style="color:#aaa; font-size:13px;">Juego de construcción</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="precio">$8.000</div>
+      <button onclick="agregarCarrito('Minecraft', 8000)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="producto">
+    <div>
+      <h3>🚗 GTA V</h3>
+      <p style="color:#aaa; font-size:13px;">Juego de mundo abierto</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="precio">$12.000</div>
+      <button onclick="agregarCarrito('GTA V', 12000)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="producto">
+    <div>
+      <h3>🏆 Fortnite</h3>
+      <p style="color:#aaa; font-size:13px;">Battle Royale</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="precio">Gratis</div>
+      <button onclick="agregarCarrito('Fortnite', 0)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="carrito">
+    <h2>🛒 Carrito</h2>
+    <ul id="lista-carrito">
+      <li style="color:#666; justify-content:center;">El carrito está vacío</li>
+    </ul>
+    <div class="total">Total: <span id="total">$0</span></div>
+    <br>
+    <button class="btn-rojo" onclick="vaciarCarrito()">Vaciar carrito</button>
+    <button class="btn-verde" onclick="comprar()">Comprar</button>
+    <p id="msg-compra">✅ Compra realizada con éxito!</p>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="pagina" id="pagina-contacto">
+  <h1>Contacto</h1>
+  <div class="contacto-info">
+    <p>📧 pedritogq22@gmail.com</p>
+    <p>📱 +54 2644804360</p>
+    <p>📍 Valle Fértil, San Agustín, San Juan, Argentina</p>
+    <p>🕐 Lunes a Viernes de 9 a 18hs</p>
+    <p>💻 <a href="https://github.com/pedritogq22-hash" target="_blank">github.com/pedritogq22-hash</a></p>
+  </div>
+  <br>
+  <h2>Envianos un mensaje</h2>
+  <form onsubmit="enviarMensaje(); return false;">
+    <input type="text" id="nombre" placeholder="Tu nombre">
+    <input type="email" id="email" placeholder="Tu email">
+    <textarea id="mensaje" rows="4" placeholder="Tu mensaje"></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <p id="msg-enviado">✅ Mensaje enviado!</p>
+</div>
+
+<!-- SOBRE MI -->
+<div class="pagina" id="pagina-sobre">
+  <h1>Sobre mí</h1>
+  <div class="sobre-mi">
+    <p>Soy Jose Pedro Garcia, estudiante de Desarrollo de Software.</p>
+    <p>Soy de Valle Fértil, San Agustín, San Juan, Argentina.</p>
+    <p>Este proyecto es una tienda de videojuegos para PC que desarrollé como parte de mi carrera. Me apasiona la programación y el desarrollo de software.</p>
+    <p>Actualmente estoy cursando la carrera y aprendiendo Python, C y JavaScript.</p>
+    <div class="habilidades">
+      <span class="habilidad">Python</span>
+      <span class="habilidad">JavaScript</span>
+      <span class="habilidad">C</span>
+      <span class="habilidad">HTML / CSS</span>
+      <span class="habilidad">Git & GitHub</span>
+    </div>
+  </div>
+</div>
+
+<!-- USUARIO -->
+<div class="pagina" id="pagina-usuario">
+  <h1>Perfil de Usuario</h1>
+  <div class="usuario-info">
+    <p>👤 <strong>Nombre:</strong> Jose Pedro Garcia</p>
+    <p>📧 <strong>Email:</strong> pedritogq22@gmail.com</p>
+    <p>📱 <strong>Teléfono:</strong> +54 2644804360</p>
+    <p>📍 <strong>Ubicación:</strong> Valle Fértil, San Agustín, San Juan, Argentina</p>
+    <p>🎓 <strong>Carrera:</strong> Desarrollo de Software</p>
+    <p>💻 <strong>GitHub:</strong> <a href="https://github.com/pedritogq22-hash" target="_blank">github.com/pedritogq22-hash</a></p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Tienda de Videojuegos — Jose Pedro Garcia</p>
+</footer>
+
+<script>
+  var carrito = [];
+
+  function mostrarPagina(pagina) {
+    var paginas = document.querySelectorAll('.pagina');
+    for (var i = 0; i < paginas.length; i++) {
+      paginas[i].classList.remove('activa');
+    }
+    document.getElementById('pagina-' + pagina).classList.add('activa');
+  }
+
+  function agregarCarrito(nombre, precio) {
+    carrito.push({ nombre: nombre, precio: precio });
+    actualizarCarrito();
+  }
+
+  function actualizarCarrito() {
+    var lista = document.getElementById('lista-carrito');
+    lista.innerHTML = '';
+
+    if (carrito.length === 0) {
+      lista.innerHTML = '<li style="color:#666; justify-content:center;">El carrito está vacío</li>';
+      document.getElementById('total').textContent = '$0';
+      return;
+    }
+
+    var total = 0;
+    for (var i = 0; i < carrito.length; i++) {
+      var item = carrito[i];
+      var li = document.createElement('li');
+      var precioTexto = item.precio === 0 ? 'Gratis' : '$' + item.precio.toLocaleString();
+      li.innerHTML = '<span>' + item.nombre + '</span><span>' + precioTexto + ' <button onclick="quitarItem(' + i + ')" style="background:#e74c3c;padding:4px 8px;">X</button></span>';
+      lista.appendChild(li);
+      total += item.precio;
+    }
+
+    document.getElementById('total').textContent = '$' + total.toLocaleString();
+  }
+
+  function quitarItem(i) {
+    carrito.splice(i, 1);
+    actualizarCarrito();
+  }
+
+  function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
+    document.getElementById('msg-compra').style.display = 'none';
+  }
+
+  function comprar() {
+    if (carrito.length === 0) {
+      alert('El carrito está vacío!');
+      return;
+    }
+    carrito = [];
+    actualizarCarrito();
+    document.getElementById('msg-compra').style.display = 'block';
+  }
+
+  function enviarMensaje() {
+    var nombre = document.getElementById('nombre').value;
+    var email = document.getElementById('email').value;
+    var mensaje = document.getElementById('mensaje').value;
+
+    if (nombre === '' || email === '' || mensaje === '') {
+      alert('Completá todos los campos!');
+      return;
+    }
+
+    document.getElementById('nombre').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('mensaje').value = '';
+    document.getElementById('msg-enviado').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
